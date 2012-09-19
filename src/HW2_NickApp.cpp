@@ -1,6 +1,6 @@
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
-#include "HW2_Nick.h"
+#include "Node.h"
 
 using namespace ci;
 using namespace ci::app;
