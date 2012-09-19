@@ -1,3 +1,12 @@
+/*	
+*	Homework #2 -- Putting stuff on top of each other.
+*	
+*	@author Nicholas Uth
+*	Written for CSE 274 on Sept 19, 2012.
+*	
+*	
+*/
+
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
 #include "Node.h"
@@ -12,10 +21,27 @@ class HW2_NickApp : public AppBasic {
 	void mouseDown( MouseEvent event );	
 	void update();
 	void draw();
+	void prepareSettings(Settings* settings);
+
+  private:
+	Surface* mySurface_;
+	Node* sentinelNode;
+
+	//Width and height of the screen
+	static const int kAppWidth=800;
+	static const int kAppHeight=600;
+	static const int kTextureSize=1024; // must be power of 2
 };
+
+void HW2_NickApp::prepareSettings(Settings* settings)
+{
+	(*settings).setWindowSize(kAppWidth,kAppHeight);
+	(*settings).setResizable(false);
+}
 
 void HW2_NickApp::setup()
 {
+	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
 }
 
 void HW2_NickApp::mouseDown( MouseEvent event )
@@ -24,6 +50,8 @@ void HW2_NickApp::mouseDown( MouseEvent event )
 
 void HW2_NickApp::update()
 {
+
+	
 }
 
 void HW2_NickApp::draw()
