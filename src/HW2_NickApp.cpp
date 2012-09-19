@@ -10,6 +10,7 @@
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
 #include "Node.h"
+#include "Circle_NickVer.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -50,7 +51,7 @@ void HW2_NickApp::mouseDown( MouseEvent event )
 
 void HW2_NickApp::update()
 {
-
+	
 	
 }
 
@@ -58,6 +59,13 @@ void HW2_NickApp::draw()
 {
 	// clear out the window with black
 	gl::clear( Color( 0, 0, 0 ) ); 
+
+	// Test run at drawing a circle
+	Vec2f center;
+	center.x = 100;
+	center.y = 150;
+	gl::color(0,250,250,250); //changes the color of the circle drawn
+	gl::drawSolidCircle(center, 70, 0); //draws a circle
 }
 
 CINDER_APP_BASIC( HW2_NickApp, RendererGl )
