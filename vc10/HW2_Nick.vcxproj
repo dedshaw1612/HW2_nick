@@ -107,6 +107,7 @@
     <ClCompile Include="..\src\HW2_NickApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\HW2_Nick.h" />
     <ClInclude Include="..\include\Resources.h" />
   </ItemGroup>
   <ItemGroup>
