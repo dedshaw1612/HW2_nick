@@ -5,7 +5,7 @@ Circle_NickVer::Circle_NickVer(void)
 {
 }
 
-Circle_NickVer::Circle_NickVer(float centerX, float centerY, float radius_in, float r, float g, float b)
+Circle_NickVer::Circle_NickVer(float centerX, float centerY, float radius_in, float r, float g, float b, uint8_t alpha)
 {
 	center.x = centerX;
 	center.y = centerY;
@@ -13,6 +13,7 @@ Circle_NickVer::Circle_NickVer(float centerX, float centerY, float radius_in, fl
 	color.r = r;
 	color.g = g;
 	color.b = b;
+	color.a = alpha;
 }
 
 Circle_NickVer::~Circle_NickVer(void)

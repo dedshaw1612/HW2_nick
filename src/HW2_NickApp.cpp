@@ -14,6 +14,7 @@
 
 using namespace ci;
 using namespace ci::app;
+using namespace cinder;
 using namespace std;
 
 class HW2_NickApp : public AppBasic {
@@ -65,12 +66,12 @@ void HW2_NickApp::setup()
 	//set up the circles
 	numCircles = 6;
 	circles = new Circle_NickVer[numCircles];
-	circles[0] = Circle_NickVer(300, 300, 45, 255, 0, 0);
-	circles[1] = Circle_NickVer(400, 300, 45, 0, 255, 0);
-	circles[2] = Circle_NickVer(500, 300, 45, 0, 0, 255);
-	circles[3] = Circle_NickVer(600, 300, 45, 100, 100, 0);
-	circles[4] = Circle_NickVer(700, 300, 45, 100, 0, 100);
-	circles[5] = Circle_NickVer(800, 300, 45, 0, 100, 100);
+	circles[0] = Circle_NickVer(300, 300, 45, 255, 0, 0, 255);
+	circles[1] = Circle_NickVer(400, 300, 45, 0, 255, 0, 255);
+	circles[2] = Circle_NickVer(500, 300, 45, 0, 0, 255, 255);
+	circles[3] = Circle_NickVer(600, 300, 45, 100, 100, 0, 255);
+	circles[4] = Circle_NickVer(700, 300, 45, 100, 0, 100, 255);
+	circles[5] = Circle_NickVer(800, 300, 45, 0, 100, 100, 255);
 	
 	// set up the linked list nodes
 	for (int i = 0; i < numCircles; i++)
@@ -142,8 +143,7 @@ void HW2_NickApp::keyDown(KeyEvent event)
 
 void HW2_NickApp::update()
 {
-	
-	//loop through nodes, ajust size of circle based on position
+	//loop through nodes, adjust size of circle based on position
 	loopNode = sentinelNode->next;
 	int inc = 1;
 	while (loopNode != sentinelNode)
@@ -152,12 +152,20 @@ void HW2_NickApp::update()
 		inc++;
 		loopNode = loopNode->next;
 	}
+	//loop through nodes, adjust alpha of circle based on position on y-axis
+	loopNode = sentinelNode->next;
+	while (loopNode != sentinelNode)
+	{
+		loopNode->circle->color.a = (((loopNode->circle->center.y)/3)+10);
+		loopNode = loopNode->next;
+	}
 }
 
 void HW2_NickApp::draw()
 {
 	// clear out the window with black
 	gl::clear( Color( 0, 0, 0 ) ); 
+	gl::enableAlphaBlending(true);
 
 	//start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
 	loopNode = sentinelNode->previous;

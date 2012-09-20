@@ -8,6 +8,7 @@
 #include "cinder/gl/gl.h"
 
 using namespace ci;
+using namespace cinder;
 
 class Circle_NickVer
 {
@@ -15,8 +16,8 @@ public:
 	// null constructor
 	Circle_NickVer(void);
 	// Main constructor. Allows the user to set the center's coordinates (floats), the radius (float),
-	// and the color (floats).
-	Circle_NickVer(float centerX, float centerY, float radius, float r, float g, float b);
+	// the color (floats), and the alpha (float).
+	Circle_NickVer(float centerX, float centerY, float radius_in, float r, float g, float b, uint8_t alpha);
 	~Circle_NickVer(void);
 	// takes a coordinate point and determines if it falls within the circle's area
 	bool isInside (float x, float y);
@@ -24,5 +25,5 @@ public:
 	// leaving these public for sake of ease
 	Vec2f center;
 	float radius;
-	Color8u color;
+	ColorA8u color;
 };
