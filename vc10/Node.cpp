@@ -44,6 +44,8 @@ void Node::swapNodes (Node* nodeToMove, bool isMovingUp)
 		swapTarget->previous = nodeToMove->previous;
 		nodeToMove->previous = swapTarget;
 		swapTarget->next = nodeToMove;
+		nodeToMove->next->previous = nodeToMove;
+		swapTarget->previous->next = swapTarget;
 	}
 	else
 	{
@@ -52,6 +54,8 @@ void Node::swapNodes (Node* nodeToMove, bool isMovingUp)
 		swapTarget->next = nodeToMove->next;
 		nodeToMove->next = swapTarget;
 		swapTarget->previous = nodeToMove;
+		nodeToMove->previous->next = nodeToMove;
+		swapTarget->next->previous = swapTarget;
 	}
 }
 
