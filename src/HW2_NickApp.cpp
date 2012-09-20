@@ -27,7 +27,6 @@ class HW2_NickApp : public AppBasic {
   private:
 	Surface* mySurface_;
 	Node* sentinelNode; // the sentinel node
-	Node* loopStateNode; // current node in a loop
 	Node* selectedNode; //user's currently selected node
 
 	Circle_NickVer* circle1;
