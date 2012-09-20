@@ -38,6 +38,8 @@ class HW2_NickApp : public AppBasic {
 	//interaction helper variables
 	float mouseX;
 	float mouseY;
+	static const int movementInterval = 15; //the number of pixels a circle moves when prompted
+			//NOTE!! --> must be cast as a float when used in circle functions
 
 	//Width and height of the screen
 	static const int kAppWidth=1100;
@@ -79,7 +81,7 @@ void HW2_NickApp::setup()
 
 void HW2_NickApp::mouseDown( MouseEvent event )
 {
-	// on mouse click, get mouse coords (as float) run loop through all circles and check if inside
+	// on mouse click, get mouse coords (as float) run loop through all nodes' circles and check if isInside
 	// if true, then set it as the selected node.
 	mouseX = (float) event.getX();
 	mouseY = (float) event.getY();
@@ -101,13 +103,37 @@ void HW2_NickApp::keyDown(KeyEvent event)
 	//TODO: '?' brings up help bar/window
 
 	//if a node == selected, then can do the following
-	if (true)
+	if (selectedNode != NULL)
 	{
+		//arrow keys change the center's X,Y coords
+		if (event.getCode() == event.KEY_UP)
+		{
+			selectedNode->circle->center.y -= (float) movementInterval; //decrement because of +Y being 'downward'
+		}
+		if (event.getCode() == event.KEY_DOWN)
+		{
+			selectedNode->circle->center.y += (float) movementInterval; //increment because of +Y being 'downward'
+		}
+		if (event.getCode() == event.KEY_LEFT)
+		{
+			selectedNode->circle->center.x -= (float) movementInterval;
+		}
+		if (event.getCode() == event.KEY_RIGHT)
+		{
+			selectedNode->circle->center.x += (float) movementInterval;
+		}
+		//Z sends it back 1 lv
+		if (event.getCode() == event.KEY_z)
+		{
+			selectedNode->swapNodes(selectedNode, false);
+		}
+		// X sends it forward 1 lv
+		if (event.getCode() == event.KEY_x)
+		{
+			selectedNode->swapNodes(selectedNode, true);
+		}
+		//TODO: C flips the list
 	}
-	//TODO: arrow keys change the center's X,Y coords
-	//TODO: Z sends it back 1 lv
-	//TODO: X sends it forward 1 lv
-	//TODO: C flips the list
 }
 
 void HW2_NickApp::update()
