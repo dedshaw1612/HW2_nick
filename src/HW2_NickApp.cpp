@@ -143,7 +143,15 @@ void HW2_NickApp::keyDown(KeyEvent event)
 void HW2_NickApp::update()
 {
 	
-	
+	//loop through nodes, ajust size of circle based on position
+	loopNode = sentinelNode->next;
+	int inc = 1;
+	while (loopNode != sentinelNode)
+	{
+		loopNode->circle->radius = (140 - (inc*20));
+		inc++;
+		loopNode = loopNode->next;
+	}
 }
 
 void HW2_NickApp::draw()
@@ -152,12 +160,12 @@ void HW2_NickApp::draw()
 	gl::clear( Color( 0, 0, 0 ) ); 
 
 	//start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
-	loopNode = sentinelNode->next;
-	while(loopNode->next != sentinelNode->next)
+	loopNode = sentinelNode->previous;
+	while(loopNode != sentinelNode)
 	{
 		gl::color(loopNode->circle->color);
 		gl::drawSolidCircle(loopNode->circle->center, loopNode->circle->radius, 0);
-		loopNode = loopNode->next;
+		loopNode = loopNode->previous;
 	}
 }
 
