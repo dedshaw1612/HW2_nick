@@ -132,7 +132,11 @@ void HW2_NickApp::keyDown(KeyEvent event)
 		{
 			selectedNode->swapNodes(selectedNode, true);
 		}
-		//TODO: C flips the list
+		//C flips the list
+		if (event.getCode() == event.KEY_c)
+		{
+			selectedNode->reverseList(sentinelNode);
+		}
 	}
 }
 
