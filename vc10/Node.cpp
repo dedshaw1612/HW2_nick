@@ -66,5 +66,5 @@ void Node::reverseList (Node* sentinel)
 	current->next = current->previous;
 	current->previous = temp;
 	current = current->next;
-	} while(current != sentinel)
+	} while(current != sentinel);
 }

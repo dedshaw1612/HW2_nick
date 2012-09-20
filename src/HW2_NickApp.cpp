@@ -19,7 +19,9 @@ using namespace std;
 class HW2_NickApp : public AppBasic {
   public:
 	void setup();
+	// mouse click selects a node if it's within the appropriate circle's radius
 	void mouseDown( MouseEvent event );	
+	void keyDown (KeyEvent event);
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
@@ -32,6 +34,10 @@ class HW2_NickApp : public AppBasic {
 
 	int numCircles;
 	Circle_NickVer* circles;
+
+	//interaction helper variables
+	float mouseX;
+	float mouseY;
 
 	//Width and height of the screen
 	static const int kAppWidth=1100;
@@ -73,10 +79,31 @@ void HW2_NickApp::setup()
 
 void HW2_NickApp::mouseDown( MouseEvent event )
 {
-	//TODO: mouse click selects a node
-	//TODO: '?' brings up help window
+	// on mouse click, get mouse coords (as float) run loop through all circles and check if inside
+	// if true, then set it as the selected node.
+	mouseX = (float) event.getX();
+	mouseY = (float) event.getY();
+	Node* temp = sentinelNode->next;
+	while (temp != sentinelNode)
+	{
+		if (temp->circle->isInside(mouseX, mouseY))
+		{
+			selectedNode = temp;
+			return;
+		}
+		temp = temp->next;
+	}
+	selectedNode = NULL;
+}
 
-	//if a node == selected
+void HW2_NickApp::keyDown(KeyEvent event)
+{
+	//TODO: '?' brings up help bar/window
+
+	//if a node == selected, then can do the following
+	if (true)
+	{
+	}
 	//TODO: arrow keys change the center's X,Y coords
 	//TODO: Z sends it back 1 lv
 	//TODO: X sends it forward 1 lv

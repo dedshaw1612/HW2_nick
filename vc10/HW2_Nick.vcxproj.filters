@@ -29,10 +29,10 @@
     <ClInclude Include="..\include\Resources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="..\include\Circle_NickVer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Circle_NickVer.h">
+    <ClInclude Include="..\include\Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
