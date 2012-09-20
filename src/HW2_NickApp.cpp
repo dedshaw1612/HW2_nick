@@ -27,6 +27,7 @@ class HW2_NickApp : public AppBasic {
   private:
 	Surface* mySurface_;
 	Node* sentinelNode; // the sentinel node
+	Node* loopNode; //current node of a loop
 	Node* selectedNode; //user's currently selected node
 
 	Circle_NickVer* circle1;
@@ -54,6 +55,8 @@ void HW2_NickApp::setup()
 
 	// set up the linked list by creating the sentinel
 	sentinelNode = new Node();
+	sentinelNode->next = sentinelNode; //done so that the add before and after methods will work properly
+	sentinelNode->previous = sentinelNode;
 
 	//set up the circles
 	circle1 = new Circle_NickVer(300, 300, 45, 255, 0, 0);
@@ -64,8 +67,12 @@ void HW2_NickApp::setup()
 	circle6 = new Circle_NickVer(800, 300, 45, 0, 100, 100);
 	
 	// set up the linked list nodes
-	(*sentinelNode).addAfter();
-
+	loopNode = sentinelNode;
+	for (int i = 0; i < 6; i++)
+	{
+	loopNode->addAfter(loopNode, circle1);
+	loopNode = loopNode->next;
+	}
 }
 
 void HW2_NickApp::mouseDown( MouseEvent event )
@@ -111,6 +118,7 @@ void HW2_NickApp::draw()
 	gl::drawSolidCircle(circle6->center, circle6->radius, 0);
 
 	//TODO: start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
+	loopNode = sentinelNode->next;
 }
 
 CINDER_APP_BASIC( HW2_NickApp, RendererGl )
