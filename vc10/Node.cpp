@@ -57,14 +57,14 @@ void Node::swapNodes (Node* nodeToMove, bool isMovingUp)
 
 void Node::reverseList (Node* sentinel)
 {
-	Node* current = sentinel->previous;
+	Node* current = sentinel;
 	Node* temp;
 
-	while(current->next != NULL && current->previous != NULL)
+	do
 	{
 	temp = current->next;
 	current->next = current->previous;
 	current->previous = temp;
 	current = current->next;
-	}
+	} while(current != sentinel)
 }

@@ -18,3 +18,7 @@ Circle_NickVer::~Circle_NickVer(void)
 {
 }
 
+bool Circle_NickVer::isInside (float x, float y)
+{
+
+}
