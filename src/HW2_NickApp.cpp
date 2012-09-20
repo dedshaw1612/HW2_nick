@@ -78,6 +78,7 @@ void HW2_NickApp::setup()
 void HW2_NickApp::mouseDown( MouseEvent event )
 {
 	//TODO: mouse click selects a node
+	//TODO: '?' brings up help window
 
 	//if a node == selected
 	//TODO: arrow keys change the center's X,Y coords
