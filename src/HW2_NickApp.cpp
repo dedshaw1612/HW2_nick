@@ -26,10 +26,19 @@ class HW2_NickApp : public AppBasic {
 
   private:
 	Surface* mySurface_;
-	Node* sentinelNode;
+	Node* sentinelNode; // the sentinel node
+	Node* loopStateNode; // current node in a loop
+	Node* selectedNode; //user's currently selected node
+
+	Circle_NickVer* circle1;
+	Circle_NickVer* circle2;
+	Circle_NickVer* circle3;
+	Circle_NickVer* circle4;
+	Circle_NickVer* circle5;
+	Circle_NickVer* circle6;
 
 	//Width and height of the screen
-	static const int kAppWidth=800;
+	static const int kAppWidth=1100;
 	static const int kAppHeight=600;
 	static const int kTextureSize=1024; // must be power of 2
 };
@@ -43,10 +52,28 @@ void HW2_NickApp::prepareSettings(Settings* settings)
 void HW2_NickApp::setup()
 {
 	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
+
+	// setup the linked list by creating the sentinel
+	sentinelNode = new Node();
+
+	// TODO: setup the circles
+	circle1 = new Circle_NickVer(300, 300, 45, 255, 0, 0);
+	circle2 = new Circle_NickVer(400, 300, 45, 0, 255, 0);
+	circle3 = new Circle_NickVer(500, 300, 45, 0, 0, 255);
+	circle4 = new Circle_NickVer(600, 300, 45, 100, 100, 0);
+	circle5 = new Circle_NickVer(700, 300, 45, 100, 0, 100);
+	circle6 = new Circle_NickVer(800, 300, 45, 0, 100, 100);
+	
 }
 
 void HW2_NickApp::mouseDown( MouseEvent event )
 {
+	//TODO: mouse click selects a node
+
+	//if a node == selected
+	//TODO: arrow keys change the center's X,Y coords
+	//TODO: Z sends it back 1 lv
+	//TODO: X sends it forward 1 lv
 }
 
 void HW2_NickApp::update()
@@ -61,11 +88,27 @@ void HW2_NickApp::draw()
 	gl::clear( Color( 0, 0, 0 ) ); 
 
 	// Test run at drawing a circle
-	Vec2f center;
-	center.x = 100;
-	center.y = 150;
-	gl::color(0,250,250,250); //changes the color of the circle drawn
-	gl::drawSolidCircle(center, 70, 0); //draws a circle
+	//Vec2f center;
+	//center.x = 100;
+	//center.y = 150;
+	//gl::color(0,250,250,250); //changes the color of the circle drawn
+	//gl::drawSolidCircle(center, 70, 0); //draws a circle
+
+	//Test
+	gl::color(circle1->color);
+	gl::drawSolidCircle(circle1->center, circle1->radius, 0);
+	gl::color(circle2->color);
+	gl::drawSolidCircle(circle2->center, circle2->radius, 0);
+	gl::color(circle3->color);
+	gl::drawSolidCircle(circle3->center, circle3->radius, 0);
+	gl::color(circle4->color);
+	gl::drawSolidCircle(circle4->center, circle4->radius, 0);
+	gl::color(circle5->color);
+	gl::drawSolidCircle(circle5->center, circle5->radius, 0);
+	gl::color(circle6->color);
+	gl::drawSolidCircle(circle6->center, circle6->radius, 0);
+
+	//TODO: start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
 }
 
 CINDER_APP_BASIC( HW2_NickApp, RendererGl )
