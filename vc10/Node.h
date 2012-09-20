@@ -25,7 +25,7 @@ public:
 	// recursively goes through the list and flips all of the next and previous pointers
 	void reverseList (Node* sentinel);
 
-private:
+	// keeping this public just to make coding a bit easier
 	Node* next;
 	Node* previous;
 	Circle_NickVer* circle;

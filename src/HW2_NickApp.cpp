@@ -64,7 +64,8 @@ void HW2_NickApp::setup()
 	circle6 = new Circle_NickVer(800, 300, 45, 0, 100, 100);
 	
 	// set up the linked list nodes
-	
+	(*sentinelNode).addAfter();
+
 }
 
 void HW2_NickApp::mouseDown( MouseEvent event )
