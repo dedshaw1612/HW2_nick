@@ -13,7 +13,6 @@ public:
 	Node(void);
 	// The main constructor. Has two pointers (next and previous) and a shape.
 	Node(Node* next, Node* previous, Circle_NickVer* circle);
-	// Unknown constructor, but I'm leaving it here just in case so nothing breaks. :P
 	~Node(void);
 	// adds a new node after the specified node.
 	void addAfter (Node* baseNode, Circle_NickVer* circleForNewNode);

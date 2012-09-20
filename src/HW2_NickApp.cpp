@@ -67,12 +67,12 @@ void HW2_NickApp::setup()
 	circle6 = new Circle_NickVer(800, 300, 45, 0, 100, 100);
 	
 	// set up the linked list nodes
-	loopNode = sentinelNode;
-	for (int i = 0; i < 6; i++)
-	{
-	loopNode->addAfter(loopNode, circle1);
-	loopNode = loopNode->next;
-	}
+	sentinelNode->addAfter(sentinelNode, circle6);
+	sentinelNode->addAfter(sentinelNode, circle5);
+	sentinelNode->addAfter(sentinelNode, circle4);
+	sentinelNode->addAfter(sentinelNode, circle3);
+	sentinelNode->addAfter(sentinelNode, circle2);
+	sentinelNode->addAfter(sentinelNode, circle1);
 }
 
 void HW2_NickApp::mouseDown( MouseEvent event )
@@ -104,21 +104,27 @@ void HW2_NickApp::draw()
 	//gl::drawSolidCircle(center, 70, 0); //draws a circle
 
 	//Test --> checks out a-okay
-	gl::color(circle1->color);
-	gl::drawSolidCircle(circle1->center, circle1->radius, 0);
-	gl::color(circle2->color);
-	gl::drawSolidCircle(circle2->center, circle2->radius, 0);
-	gl::color(circle3->color);
-	gl::drawSolidCircle(circle3->center, circle3->radius, 0);
-	gl::color(circle4->color);
-	gl::drawSolidCircle(circle4->center, circle4->radius, 0);
-	gl::color(circle5->color);
-	gl::drawSolidCircle(circle5->center, circle5->radius, 0);
-	gl::color(circle6->color);
-	gl::drawSolidCircle(circle6->center, circle6->radius, 0);
+	//gl::color(circle1->color);
+	//gl::drawSolidCircle(circle1->center, circle1->radius, 0);
+	//gl::color(circle2->color);
+	//gl::drawSolidCircle(circle2->center, circle2->radius, 0);
+	//gl::color(circle3->color);
+	//gl::drawSolidCircle(circle3->center, circle3->radius, 0);
+	//gl::color(circle4->color);
+	//gl::drawSolidCircle(circle4->center, circle4->radius, 0);
+	//gl::color(circle5->color);
+	//gl::drawSolidCircle(circle5->center, circle5->radius, 0);
+	//gl::color(circle6->color);
+	//gl::drawSolidCircle(circle6->center, circle6->radius, 0);
 
-	//TODO: start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
+	//start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
 	loopNode = sentinelNode->next;
+	while(loopNode->next != sentinelNode->next)
+	{
+		gl::color(loopNode->circle->color);
+		gl::drawSolidCircle(loopNode->circle->center, loopNode->circle->radius, 0);
+		loopNode = loopNode->next;
+	}
 }
 
 CINDER_APP_BASIC( HW2_NickApp, RendererGl )
