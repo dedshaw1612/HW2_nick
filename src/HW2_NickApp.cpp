@@ -53,16 +53,18 @@ void HW2_NickApp::setup()
 {
 	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
 
-	// setup the linked list by creating the sentinel
+	// set up the linked list by creating the sentinel
 	sentinelNode = new Node();
 
-	// TODO: setup the circles
+	//set up the circles
 	circle1 = new Circle_NickVer(300, 300, 45, 255, 0, 0);
 	circle2 = new Circle_NickVer(400, 300, 45, 0, 255, 0);
 	circle3 = new Circle_NickVer(500, 300, 45, 0, 0, 255);
 	circle4 = new Circle_NickVer(600, 300, 45, 100, 100, 0);
 	circle5 = new Circle_NickVer(700, 300, 45, 100, 0, 100);
 	circle6 = new Circle_NickVer(800, 300, 45, 0, 100, 100);
+	
+	// set up the linked list nodes
 	
 }
 
@@ -94,7 +96,7 @@ void HW2_NickApp::draw()
 	//gl::color(0,250,250,250); //changes the color of the circle drawn
 	//gl::drawSolidCircle(center, 70, 0); //draws a circle
 
-	//Test
+	//Test --> checks out a-okay
 	gl::color(circle1->color);
 	gl::drawSolidCircle(circle1->center, circle1->radius, 0);
 	gl::color(circle2->color);
