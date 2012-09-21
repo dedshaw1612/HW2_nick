@@ -43,7 +43,6 @@ class HW2_NickApp : public AppBasic {
 	FallingCircle* fallingCircles;
 	int numFalling;
 	bool showInstructions;
-	Surface* mySurface_; // will hold the instructions when they're called for
 	Node* sentinelNode; // the sentinel node
 	Node* loopNode; //current node of a loop
 	Node* selectedNode; //user's currently selected node
@@ -76,8 +75,6 @@ void HW2_NickApp::setup()
 	numFalling = 0;
 	fallingCircles = new FallingCircle[15];
 	selectedNode = NULL;
-
-	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
 
 	// set up the linked list by creating the sentinel
 	sentinelNode = new Node();
@@ -185,8 +182,7 @@ void HW2_NickApp::update()
 		loopNode = loopNode->next;
 	}
 	
-	
-	// check if any of the falling circles got in the player circle. reset score if true.
+	// check if any of the falling circles got in the player circle (with some leeway). reset score if true.
 	if(selectedNode != NULL)
 	{
 		float dx;
@@ -195,7 +191,7 @@ void HW2_NickApp::update()
 		{
 			dx = (selectedNode->circle->center.x) - (fallingCircles[i].center.x);
 			dy = (selectedNode->circle->center.y) - (fallingCircles[i].center.y);
-			if (sqrt(pow(dx,2)+pow(dy,2)) < (selectedNode->circle->radius + fallingCircles[i].radius))
+			if (sqrt(pow(dx,2)+pow(dy,2)) < (selectedNode->circle->radius + fallingCircles[i].radius - 7))
 			{
 				if (score > highscore)
 				{
@@ -235,6 +231,13 @@ void HW2_NickApp::draw()
 	gl::clear( Color( 255, 255, 255 ) ); 
 	gl::enableAlphaBlending(true);
 
+	// draw the falling circles
+	gl::color(Color(0,0,0));
+	for(int i = 0; i < numFalling; i++)
+	{
+		gl::drawSolidCircle(fallingCircles[i].center, fallingCircles[i].radius, 0);
+	}
+
 	// start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
 	loopNode = sentinelNode->previous;
 	while(loopNode != sentinelNode)
@@ -244,19 +247,12 @@ void HW2_NickApp::draw()
 		loopNode = loopNode->previous;
 	}
 
-	// draw the falling circles
-	gl::color(Color(0,0,0));
-	for(int i = 0; i < numFalling; i++)
-	{
-		gl::drawSolidCircle(fallingCircles[i].center, fallingCircles[i].radius, 0);
-	}
-
 	// draw the score
 	std::stringstream concat;
 	concat << "Score: " << score << " (" << highscore << ") ";
 	gl::drawString(concat.str(), Vec2f(kAppWidth-150, kAppHeight-30), Color(0,0,0), Font("Helvetica", 20));
 
-	// draw the instructions
+	// draw the instructions if toggled
 	if (showInstructions)
 	{
 		gl::drawString("Click to select a circle. Arrows move; Z moves it back; X moves it forward; C flips the list; ',' toggles instructions. --DODGE--", Vec2f(10, kAppHeight-30), Color(0,0,0), Font("Helvetica", 20));
