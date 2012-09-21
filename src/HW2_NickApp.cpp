@@ -4,6 +4,14 @@
 *	@author Nicholas Uth
 *	Written for CSE 274 on Sept 19, 2012.
 *	
+*	Satisfies the following goals:
+*	A - This program features a Doubly-Linked Circular-Never-Empty List, which holds circles
+*		These circles are drawn so that the higher ones of the list are on top of the ones below them.
+*	C - It is possible to move/reorder a circle (node) up or down the linked list via the keyboard's Z and X keys.
+*	D - It is possible to move circles around the screen using the keyboard.
+*	E - By pressing 'C', the user reverses the order of the list.
+*	G - The circles will become more transparent the further up they are on the screen (closer to y = 0).
+*		They become more opaque when they approach the bottom of the screen. (Alpha will never be below 0 however)
 *	
 */
 
