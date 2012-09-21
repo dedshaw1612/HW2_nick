@@ -20,6 +20,7 @@
 #include "Node.h"
 #include "Circle_NickVer.h"
 #include "FallingCircle.h"
+#include <algorithm>
 
 using namespace ci;
 using namespace ci::app;
@@ -38,6 +39,7 @@ class HW2_NickApp : public AppBasic {
 
   private:
 	int score;
+	int highscore;
 	FallingCircle* fallingCircles;
 	int numFalling;
 	Surface* mySurface_; // will hold the instructions when they're called for
@@ -69,8 +71,10 @@ void HW2_NickApp::prepareSettings(Settings* settings)
 void HW2_NickApp::setup()
 {
 	score = 0;
+	highscore = 0;
 	numFalling = 0;
 	fallingCircles = new FallingCircle[15];
+	selectedNode = NULL;
 
 	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
 
@@ -175,6 +179,24 @@ void HW2_NickApp::update()
 		loopNode->circle->color.a = (((loopNode->circle->center.y)/3)+10);
 		loopNode = loopNode->next;
 	}
+	
+	
+	// check if any of the falling circles got in the player circle. reset score if true.
+	if(selectedNode != NULL)
+	{
+		float dx;
+		float dy;
+		for (int i = 0; i < numFalling; i++)
+		{
+			dx = (selectedNode->circle->center.x) - (fallingCircles[i].center.x);
+			dy = (selectedNode->circle->center.y) - (fallingCircles[i].center.y);
+			if (sqrt(pow(dx,2)+pow(dy,2)) < (selectedNode->circle->radius + fallingCircles[i].radius))
+			{
+				highscore = score;
+				score = 0;
+			}
+		}
+	}
 
 	// move the falling circles & reset any circles that hit the bottom
 	for (int i = 0; i < numFalling; i++)
@@ -187,7 +209,7 @@ void HW2_NickApp::update()
 		}
 	}
 
-	//generate new circles
+	//generate new circles at random if there's less than the cap
 	if (((rand()%100 + 1) > 99) && numFalling < 15)
 	{
 		fallingCircles[numFalling] = FallingCircle();
@@ -216,6 +238,11 @@ void HW2_NickApp::draw()
 	{
 		gl::drawSolidCircle(fallingCircles[i].center, fallingCircles[i].radius, 0);
 	}
+
+	//TODO: draw the score
+
+	//TODO: draw the instructions
+
 }
 
 CINDER_APP_BASIC( HW2_NickApp, RendererGl )
