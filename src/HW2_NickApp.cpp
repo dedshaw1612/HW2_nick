@@ -42,6 +42,7 @@ class HW2_NickApp : public AppBasic {
 	int highscore;
 	FallingCircle* fallingCircles;
 	int numFalling;
+	bool showInstructions;
 	Surface* mySurface_; // will hold the instructions when they're called for
 	Node* sentinelNode; // the sentinel node
 	Node* loopNode; //current node of a loop
@@ -121,7 +122,16 @@ void HW2_NickApp::mouseDown( MouseEvent event )
 
 void HW2_NickApp::keyDown(KeyEvent event)
 {
-	//TODO: '?' brings up help bar/window
+	//? toggles instructions
+	if (event.getCode() == event.KEY_COMMA)
+	{
+		showInstructions = !showInstructions;
+	}
+	//C flips the list
+	if (event.getCode() == event.KEY_c)
+	{
+		selectedNode->reverseList(sentinelNode);
+	}
 
 	//if a node == selected, then can do the following
 	if (selectedNode != NULL)
@@ -152,11 +162,6 @@ void HW2_NickApp::keyDown(KeyEvent event)
 		if (event.getCode() == event.KEY_x)
 		{
 			selectedNode->swapNodes(selectedNode, true);
-		}
-		//C flips the list
-		if (event.getCode() == event.KEY_c)
-		{
-			selectedNode->reverseList(sentinelNode);
 		}
 	}
 }
@@ -217,7 +222,7 @@ void HW2_NickApp::update()
 	}
 
 	//generate new circles at random if there's less than the cap
-	if (((rand()%100 + 1) > 99) && numFalling < 15)
+	if (((rand()%100 + 1) > 98) && numFalling < 15)
 	{
 		fallingCircles[numFalling] = FallingCircle();
 		numFalling++;
@@ -230,7 +235,7 @@ void HW2_NickApp::draw()
 	gl::clear( Color( 255, 255, 255 ) ); 
 	gl::enableAlphaBlending(true);
 
-	//start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
+	// start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
 	loopNode = sentinelNode->previous;
 	while(loopNode != sentinelNode)
 	{
@@ -239,20 +244,23 @@ void HW2_NickApp::draw()
 		loopNode = loopNode->previous;
 	}
 
-	//draw the falling circles
+	// draw the falling circles
 	gl::color(Color(0,0,0));
 	for(int i = 0; i < numFalling; i++)
 	{
 		gl::drawSolidCircle(fallingCircles[i].center, fallingCircles[i].radius, 0);
 	}
 
-	//TODO: draw the score
+	// draw the score
 	std::stringstream concat;
 	concat << "Score: " << score << " (" << highscore << ") ";
-	gl::drawString(concat.str(), Vec2f(kAppWidth-200, kAppHeight-30), Color(0,0,0), Font("Helvetica", 28));
+	gl::drawString(concat.str(), Vec2f(kAppWidth-150, kAppHeight-30), Color(0,0,0), Font("Helvetica", 20));
 
-	//TODO: draw the instructions
-
+	// draw the instructions
+	if (showInstructions)
+	{
+		gl::drawString("Click to select a circle. Arrows move; Z moves it back; X moves it forward; C flips the list; ',' toggles instructions. --DODGE--", Vec2f(10, kAppHeight-30), Color(0,0,0), Font("Helvetica", 20));
+	}
 }
 
 CINDER_APP_BASIC( HW2_NickApp, RendererGl )
