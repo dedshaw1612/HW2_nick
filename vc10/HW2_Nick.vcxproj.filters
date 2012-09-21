@@ -24,7 +24,7 @@
     <ClCompile Include="Circle_NickVer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FallingBlock.cpp">
+    <ClCompile Include="FallingCircle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClInclude Include="..\include\Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\FallingBlock.h">
+    <ClInclude Include="..\include\FallingCircle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

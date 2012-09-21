@@ -19,7 +19,7 @@
 #include "cinder/gl/gl.h"
 #include "Node.h"
 #include "Circle_NickVer.h"
-#include "FallingBlock.h"
+#include "FallingCircle.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -38,8 +38,8 @@ class HW2_NickApp : public AppBasic {
 
   private:
 	int score;
-	FallingBlock* blocks;
-	int numBlocks;
+	FallingCircle* fallingCircles;
+	int numFalling;
 	Surface* mySurface_; // will hold the instructions when they're called for
 	Node* sentinelNode; // the sentinel node
 	Node* loopNode; //current node of a loop
@@ -69,8 +69,8 @@ void HW2_NickApp::prepareSettings(Settings* settings)
 void HW2_NickApp::setup()
 {
 	score = 0;
-	blocks = new FallingBlock[7];
-	numBlocks = 0;
+	numFalling = 0;
+	fallingCircles = new FallingCircle[15];
 
 	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
 
@@ -176,10 +176,23 @@ void HW2_NickApp::update()
 		loopNode = loopNode->next;
 	}
 
-	//loop through the blocks to make them fall (or delete them if they reached the bottom, incrementing score if so)s
+	// move the falling circles & reset any circles that hit the bottom
+	for (int i = 0; i < numFalling; i++)
+	{
+		fallingCircles[i].center.y += fallingCircles[i].speed;
+		if (fallingCircles[i].center.y >= (kAppHeight - 10))
+		{
+			fallingCircles[i].reset();
+			score++;
+		}
+	}
 
-	// check if a block spawns randomly
-
+	//generate new circles
+	if (((rand()%100 + 1) > 99) && numFalling < 15)
+	{
+		fallingCircles[numFalling] = FallingCircle();
+		numFalling++;
+	}
 }
 
 void HW2_NickApp::draw()
@@ -197,11 +210,11 @@ void HW2_NickApp::draw()
 		loopNode = loopNode->previous;
 	}
 
-	//draw the blocks
+	//draw the falling circles
 	gl::color(Color(0,0,0));
-	for (int i = 0; i < numBlocks; i++)
+	for(int i = 0; i < numFalling; i++)
 	{
-		gl::drawSolidRect(*blocks[i].rect, true);
+		gl::drawSolidCircle(fallingCircles[i].center, fallingCircles[i].radius, 0);
 	}
 }
 

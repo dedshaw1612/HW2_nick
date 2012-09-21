@@ -10,20 +10,23 @@
 using namespace ci;
 using namespace cinder;
 
-class FallingBlock
+class FallingCircle
 {
 public:
-	// standard constructor. All blocks are practically the same (except for their random X coordinate).
-	FallingBlock(void);
-	~FallingBlock(void);
+	// standard constructor. All are practically the same (except for their random X coordinate).
+	FallingCircle(void);
+	~FallingCircle(void);
+	void reset(void);
 
 	//kept public for sake of ease
-	Rectf* rect;
+	Vec2f center;
+	static const int radius = 10;
+	int speed;
 
 private:
 	// constant values designating size and position
 	static const int xMin = 10;
-	static const int xMax = 1000;
-	static const int width = 100;
-	static const int height = 100;
+	static const int xMax = 1090;
+	static const int minSpeed = 1;
+	static const int maxSpeed = 7;
 };
