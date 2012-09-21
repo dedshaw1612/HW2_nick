@@ -192,7 +192,10 @@ void HW2_NickApp::update()
 			dy = (selectedNode->circle->center.y) - (fallingCircles[i].center.y);
 			if (sqrt(pow(dx,2)+pow(dy,2)) < (selectedNode->circle->radius + fallingCircles[i].radius))
 			{
-				highscore = score;
+				if (score > highscore)
+				{
+					highscore = score;
+				}
 				score = 0;
 			}
 		}
@@ -206,6 +209,10 @@ void HW2_NickApp::update()
 		{
 			fallingCircles[i].reset();
 			score++;
+			if (score > highscore)
+			{
+				highscore = score;
+			}
 		}
 	}
 
@@ -240,6 +247,9 @@ void HW2_NickApp::draw()
 	}
 
 	//TODO: draw the score
+	std::stringstream concat;
+	concat << "Score: " << score << " (" << highscore << ") ";
+	gl::drawString(concat.str(), Vec2f(kAppWidth-200, kAppHeight-30), Color(0,0,0), Font("Helvetica", 28));
 
 	//TODO: draw the instructions
 
