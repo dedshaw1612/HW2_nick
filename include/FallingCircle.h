@@ -16,6 +16,9 @@ public:
 	// standard constructor. All are practically the same (except for their random X coordinate).
 	FallingCircle(void);
 	~FallingCircle(void);
+	// recycles the falling circle by randomizing it's X value and it's speed while sending 
+	// it back to the top of the screen. no need to delete it this way, and it gives the game
+	// more challenge progression
 	void reset(void);
 
 	//kept public for sake of ease

@@ -7,11 +7,13 @@
 *	Satisfies the following goals:
 *	A - This program features a Doubly-Linked Circular-Never-Empty List, which holds circles
 *		These circles are drawn so that the higher ones of the list are on top of the ones below them.
+*	B - Displays controls at bottom left. Can be toggled by pressing '?'.
 *	C - It is possible to move/reorder a circle (node) up or down the linked list via the keyboard's Z and X keys.
 *	D - It is possible to move circles around the screen using the keyboard.
 *	E - By pressing 'C', the user reverses the order of the list.
 *	G - The circles will become more transparent the further up they are on the screen (closer to y = 0).
 *		They become more opaque when they approach the bottom of the screen. (Alpha will never be below 0 however)
+*	J - User can now move the circles around to try and dodge falling objects. 
 *	
 */
 
@@ -29,11 +31,15 @@ using namespace std;
 
 class HW2_NickApp : public AppBasic {
   public:
+	// declares some important variables and objects
 	void setup();
 	// mouse click selects a node if it's within the appropriate circle's radius
-	void mouseDown( MouseEvent event );	
+	void mouseDown( MouseEvent event );
+	// certain keys are attached to functions that move circles around
 	void keyDown (KeyEvent event);
+	// handles the non-image math behind the game and lists
 	void update();
+	// draws the images of the nodes and falling circles to a window
 	void draw();
 	void prepareSettings(Settings* settings);
 
@@ -120,7 +126,7 @@ void HW2_NickApp::mouseDown( MouseEvent event )
 void HW2_NickApp::keyDown(KeyEvent event)
 {
 	//? toggles instructions
-	if (event.getCode() == event.KEY_COMMA)
+	if (event.getChar() == '?')
 	{
 		showInstructions = !showInstructions;
 	}
@@ -255,7 +261,7 @@ void HW2_NickApp::draw()
 	// draw the instructions if toggled
 	if (showInstructions)
 	{
-		gl::drawString("Click to select a circle. Arrows move; Z moves it back; X moves it forward; C flips the list; ',' toggles instructions. --DODGE--", Vec2f(10, kAppHeight-30), Color(0,0,0), Font("Helvetica", 20));
+		gl::drawString("Click to select a circle. Arrows move; Z moves it back; X moves it forward; C flips the list; ? toggles instructions. --DODGE--", Vec2f(10, kAppHeight-30), Color(0,0,0), Font("Helvetica", 20));
 	}
 }
 
