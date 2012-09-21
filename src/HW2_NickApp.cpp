@@ -19,6 +19,7 @@
 #include "cinder/gl/gl.h"
 #include "Node.h"
 #include "Circle_NickVer.h"
+#include "FallingBlock.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -36,7 +37,10 @@ class HW2_NickApp : public AppBasic {
 	void prepareSettings(Settings* settings);
 
   private:
-	Surface* mySurface_;
+	int score;
+	FallingBlock* blocks;
+	int numBlocks;
+	Surface* mySurface_; // will hold the instructions when they're called for
 	Node* sentinelNode; // the sentinel node
 	Node* loopNode; //current node of a loop
 	Node* selectedNode; //user's currently selected node
@@ -64,6 +68,10 @@ void HW2_NickApp::prepareSettings(Settings* settings)
 
 void HW2_NickApp::setup()
 {
+	score = 0;
+	blocks = new FallingBlock[7];
+	numBlocks = 0;
+
 	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
 
 	// set up the linked list by creating the sentinel
@@ -167,12 +175,17 @@ void HW2_NickApp::update()
 		loopNode->circle->color.a = (((loopNode->circle->center.y)/3)+10);
 		loopNode = loopNode->next;
 	}
+
+	//loop through the blocks to make them fall (or delete them if they reached the bottom, incrementing score if so)s
+
+	// check if a block spawns randomly
+
 }
 
 void HW2_NickApp::draw()
 {
-	// clear out the window with black
-	gl::clear( Color( 0, 0, 0 ) ); 
+	// clear out the window with white
+	gl::clear( Color( 255, 255, 255 ) ); 
 	gl::enableAlphaBlending(true);
 
 	//start @ sentinel node... loop BACKWARDS till you get back to it and draw each node along the way
@@ -182,6 +195,13 @@ void HW2_NickApp::draw()
 		gl::color(loopNode->circle->color);
 		gl::drawSolidCircle(loopNode->circle->center, loopNode->circle->radius, 0);
 		loopNode = loopNode->previous;
+	}
+
+	//draw the blocks
+	gl::color(Color(0,0,0));
+	for (int i = 0; i < numBlocks; i++)
+	{
+		gl::drawSolidRect(*blocks[i].rect, true);
 	}
 }
 

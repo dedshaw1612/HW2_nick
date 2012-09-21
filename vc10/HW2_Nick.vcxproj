@@ -106,10 +106,12 @@
   <ItemGroup>
     <ClCompile Include="..\src\HW2_NickApp.cpp" />
     <ClCompile Include="Circle_NickVer.cpp" />
+    <ClCompile Include="FallingBlock.cpp" />
     <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Circle_NickVer.h" />
+    <ClInclude Include="..\include\FallingBlock.h" />
     <ClInclude Include="..\include\Node.h" />
     <ClInclude Include="..\include\Resources.h" />
   </ItemGroup>

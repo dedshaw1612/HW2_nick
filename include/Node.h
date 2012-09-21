@@ -9,7 +9,7 @@
 class Node
 {
 public:
-	// Blank constructor. Constructs a sentinel node.
+	// Blank constructor. Can be used to construct a sentinel node.
 	Node(void);
 	// The main constructor. Has two pointers (next and previous) and a shape.
 	Node(Node* next, Node* previous, Circle_NickVer* circle);
