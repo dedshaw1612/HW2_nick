@@ -1,6 +1,7 @@
 #include "..\include\Circle_NickVer.h"
 #include <algorithm>
 
+
 Circle_NickVer::Circle_NickVer(void)
 {
 }

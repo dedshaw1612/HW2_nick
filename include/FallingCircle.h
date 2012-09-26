@@ -3,6 +3,9 @@
 *	@author Nicholas Uth
 */
 
+//it maybe easier to have it implemented like this, but have you considered or attempted 
+//extending circle or maybe even just adding extra stuff to Circle instead of
+//making a sepearate class?
 #pragma once
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"

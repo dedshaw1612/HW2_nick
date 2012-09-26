@@ -79,6 +79,8 @@ void HW2_NickApp::setup()
 	score = 0;
 	highscore = 0;
 	numFalling = 0;
+	//maybe the game could start off with 1 circle and as it progresses, more circles could be added
+	//to make it harder. And then when the user messes up, instead of reseting to the same number, it resets back to 1 circle.
 	fallingCircles = new FallingCircle[15];
 	selectedNode = NULL;
 

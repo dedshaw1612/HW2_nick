@@ -14,6 +14,7 @@ Node::Node(Node* next_in, Node* previous_in, Circle_NickVer* circle_in)
 	circle = circle_in;
 }
 
+//What is this method used for? Is there a way to reuse code to not have this function?
 Node::~Node(void)
 {
 }
@@ -24,6 +25,7 @@ void Node::addAfter (Node* baseNode, Circle_NickVer* circleForNewNode)
 	Node* temp = new Node(nextNode, baseNode, circleForNewNode);
 	baseNode->next = temp;
 	nextNode->previous = temp;
+	//should there be a "delete temp;" here to avoid taking up space?
 }
 
 void Node::addBefore (Node* baseNode, Circle_NickVer* circleForNewNode)
